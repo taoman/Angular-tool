@@ -1,0 +1,39 @@
+<div id="contain">
+  <form [formGroup]="Form">
+
+  <div class="enter">
+    <mat-form-field appearance="legacy">
+      <mat-label>用户名</mat-label>
+      <input matInput formControlName="name"  required (blur)="vertifyName()" />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint class="{{!vertify?'tip-success':'tip'}}">{{tip}}</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>密码</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="psd" (blur)="vertifyPsd()" (keyup.enter)="login()" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-grid-list cols="2" rowHeight="3:1">
+        <mat-grid-tile class="cancel {{registerStatus && vertify?'cancel-active':''}}" [@slideStatus]="isOpen ? 'open' : 'closed'" (click)="register()">注册</mat-grid-tile>
+        <mat-grid-tile class="login" (click)="login()">登录</mat-grid-tile>
+        </mat-grid-list>
+  </div>
+</form>
+
+  <!-- <mat-form-field MatSnackBarVerticalPosition>
+    <mat-label>Snack bar duration (seconds)</mat-label>
+    <input  type="number" [(ngModel)]="durationInSeconds" matInput>
+    </mat-form-field>
+    <button mat-stroked-button (click)="openSnackBar()" aria-label="Show an example snack-bar">
+    Pizza party
+    </button> -->
+</div>
+
